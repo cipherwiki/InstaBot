@@ -238,7 +238,7 @@ const path = require("path");
 const os = require('os');
 
 const app = express();
-const port = 80; // Use port 5000
+const port = 7070; // Use port 7070
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -326,7 +326,7 @@ app.get('*', (req, res) => {
 // -------------------------
 
 app.listen(port, () => {
-  const localhostUrl = `http://localhost`;
+  const localhostUrl = `http://localhost:${port}`;
   const networkInterfaces = os.networkInterfaces();
   let hotspotGatewayUrl = '';
 
@@ -335,7 +335,7 @@ app.listen(port, () => {
     const interfaceInfo = networkInterfaces[key];
     for (const info of interfaceInfo) {
       if (info.family === 'IPv4' && info.address.startsWith('192.168.')) {
-        hotspotGatewayUrl = `http://${info.address}`;
+        hotspotGatewayUrl = `http://${info.address}:${port}`;
         break;
       }
     }
